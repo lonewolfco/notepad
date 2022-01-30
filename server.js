@@ -5,6 +5,7 @@ const fs = require ('fs');
 
 // helper method for generating unique ids
 const uuid = require('./helpers/uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,6 +24,21 @@ app.use(express.urlencoded({ extended: true }));
 
 // require notes JSON file
 const noteLog = require('./db/db.json');
+
+
+// Function to rewrite data to JSON db
+// function writeDB(notes){
+//     let jsonFilePath = path.join(__dirname, "/db/db.json");
+//     // Converts new JSON Array back to string
+//     fs.writeFile(jsonFilePath, JSON.stringify(noteLog), (err) => {
+//         if (err) {
+//             return console.log(err);
+//         } else {
+//             console.log('Note Saved!');
+//         };
+
+//     });
+// }
 
 // GET Route for homepage
 app.get('/', (req, res) =>{
@@ -46,9 +62,7 @@ app.post('/api/notes', (req, res) => {
     let jsonFilePath = path.join(__dirname, "/db/db.json");
     newNote = req.body;
 
-    newNote.id =   Math.floor((1 + Math.random()) * 0x10000)
-    .toString(16)
-    .substring(1);
+    newNote.id =  uuidv4();
 
     noteLog.push(newNote);
 
@@ -65,57 +79,39 @@ app.post('/api/notes', (req, res) => {
 
     });
 
-// app.post('/api/notes', (req, res) => {
-//     // Log that a POST request was received
-//     console.info(`${req.method} request received to add a note`);
-  
-//     // Destructuring assignment for the items in req.body
-//     const { title, text} = req.body;
-  
-//     // If all the required properties are present
-//     if (title && text) {
-//       // Variable for the object we will save
-//       const newNote = {
-//         title,
-//         text,
-//         note_id: uuid(),
-//       };
-  
-//       // Obtain existing reviews
-//       fs.readFile('./db/db.json', (err, data) => {
-//         if (err) {
-//           console.error(err);
-//         } else {
-//           // Convert string into JSON object
-//           const parsedNote = JSON.parse(data);
-  
-//           // Add a new review
-//           parsedNote.push(newNote);
-  
-//           // Write updated reviews back to the file
-//           fs.writeFile(
-//             './db/db.json',
-//             JSON.stringify(parsedNote, null, 3),
-//             (writeErr) =>
-//               writeErr
-//                 ? console.error(writeErr)
-//                 : console.info('Successfully updated notes!')
-//           );
-//         }
-//       });
-  
-//       const response = {
-//         status: 'success',
-//         body: newNote,
-//       };
-  
-//       console.log(response);
-//       res.status(201).json(response);
-//     } else {
-//       res.status(500).json('Error in posting note');
-//     }
-//   });
-  
+    // DELETE request: Delete a note :D
+    app.delete("/api/notes/:id", function(req, res){
+        
+        // Obtains id and converts to a string
+        let id = req.params.id.toString();
+
+        // Goes through notesArray searching for matching ID
+        for (i=0; i < noteLog.length; i++){
+           
+            if (noteLog[i].id == id){
+                // responds with deleted note
+                res.send(noteLog[i]);
+                // Removes the deleted note
+                noteLog.splice(i,1);
+                break;
+            };
+        };
+
+        // Write notes data to database
+        let jsonFilePath = path.join(__dirname, "/db/db.json");
+        // Converts new JSON Array back to string
+        fs.writeFile(jsonFilePath, JSON.stringify(noteLog), (err) => {
+            if (err) {
+                return console.log(err);
+            } else {
+                console.log('Note Trashed');
+            };
+    
+        });
+
+    });
+
+
 
 // Wildcard route to direct users back to homepage
 app.get('*', (req, res) => {

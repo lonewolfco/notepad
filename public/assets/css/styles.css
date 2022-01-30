@@ -3,6 +3,24 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #333533;
+}
+
+nav {
+  background-color: #242423;
+}
+
+#jumbotron {
+  background: #aeb4b1c4;
+}
+
+#secondary-jumbotron {
+  background-color: #dedfdd;
+}
+
+.btn {
+  background-color: #CFDBD5;
+  color: #000000;
 }
 
 .save-note {
