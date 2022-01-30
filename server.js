@@ -4,15 +4,11 @@ const path = require('path');
 const fs = require ('fs');
 
 // helper method for generating unique ids
-const uuid = require('./helpers/uuid');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-
-// const api = require('./routes/index');
-// const noteJson = require('./db/db');
 
 app.use(express.static('public'));
 
@@ -26,19 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 const noteLog = require('./db/db.json');
 
 
-// Function to rewrite data to JSON db
-// function writeDB(notes){
-//     let jsonFilePath = path.join(__dirname, "/db/db.json");
-//     // Converts new JSON Array back to string
-//     fs.writeFile(jsonFilePath, JSON.stringify(noteLog), (err) => {
-//         if (err) {
-//             return console.log(err);
-//         } else {
-//             console.log('Note Saved!');
-//         };
-
-//     });
-// }
+// =========================|
+// GET, POST, DELETE ROUTES |
+// =========================|
 
 // GET Route for homepage
 app.get('/', (req, res) =>{
@@ -70,7 +56,7 @@ app.post('/api/notes', (req, res) => {
         if (err) {
             return console.log(err);
         } else {
-            console.log('Note Saved!');
+            console.log('Note Saved 💾 ');
         };
 
     });
@@ -104,7 +90,7 @@ app.post('/api/notes', (req, res) => {
             if (err) {
                 return console.log(err);
             } else {
-                console.log('Note Trashed');
+                console.log('Note Trashed 🗑️ ');
             };
     
         });
