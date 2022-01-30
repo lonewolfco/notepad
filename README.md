@@ -1,4 +1,4 @@
-# Note Pad
+# 📝 Note Pad
 [GitHub Repo](https://github.com/lonewolfco/readmegen)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lo-notepad.herokuapp.com/)  
