@@ -1,4 +1,5 @@
-# 📝 Note Pad
+# 📝 Note Pad 
+
 [GitHub Repo](https://github.com/lonewolfco/notepad)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lo-notepad.herokuapp.com/)  
@@ -11,8 +12,6 @@
 - [Acceptance Criteria](#ac)
 - [Languages Used](#languages)
 - [Mock-Up](#mockup)
-- [Report a Bug](#bug)
-- [Questions?](#questions)
 - [License](#license)
 
 ---
@@ -77,7 +76,8 @@ The following images show the web application's appearance and functionality:
 <a name="mockup"></a>
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightblue.svg)](https://opensource.org/licenses/MIT)  
 
-© 2022 LoneWolfCo
+© 2022 LoneWolfCo (Lo Selby)
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
