@@ -1,5 +1,5 @@
 # 📝 Note Pad
-[GitHub Repo](https://github.com/lonewolfco/readmegen)
+[GitHub Repo](https://github.com/lonewolfco/notepad)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lo-notepad.herokuapp.com/)  
 
